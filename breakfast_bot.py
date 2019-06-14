@@ -1,35 +1,44 @@
-# 2-second delay in response. Will need to use time
-
-# program must do this :
-    # Get input and use it to determine what happens next
-    # Handle bad input without crashing
-    # Be flexible with the input the user can enter
-    # print message to the console, with a short pause
-    # Allow the player to order again if they like
+import time
 
 
-# Input & Conditionals
-# input function always returns a string ****
-# int() & str() functions to change type
+def print_pause(message_to_print):
+    print(message_to_print)
+    time.sleep(2)
 
-print("Hello! I am Bob, the Breakfast Bot.")
-print("Today we have two breakfasts available.")
-print("The first is waffles with strawberries and whipped cream.")
-print("The second is sweet potato pancakes with butter and syrup")
+
+def valid_input(prompt, option1, option2):
+    while True:
+        response = input(prompt).lower()
+        if option1 in response:
+            return response
+        elif option2 in response:
+            return response
+        else:
+            print_pause("Sorry, I don't understand.")
+
+def intro():
+    print_pause("Hello! I am Bob, the Breakfast Bot.")
+    print_pause("Today we have two breakfasts available.")
+    print_pause("The first is waffles with strawberries and whipped cream.")
+    print_pause("The second is sweet potato pancakes with butter and syrup.")
+
 
 while True:
 
-    menu_choice = input(
-    "Please place your order."
-    "Would you like waffles or pancakes?\n").lower()
+    response = valid_input("Please place your order. "
+                           "Would you like waffles or pancakes?\n",
+                           "waffles", "pancakes")
+    if "waffles" in response:
+        print_pause("Waffles it is!")
+    elif "pancakes" in response:
+        print_pause("Pancakes it is!")
 
-    if menu_choice == 'Waffles' in menu_choice:
-        print('Waffles it is!')
-        break
-    elif menu_choice == 'Pancakes' in menu_choice:
-        print('Pancakes it is!')
-        break
-    else:
-        print("Sorry, I don't understand.")
-print('Your order will be ready shortly')
-# Getting Valid Input
+    print_pause("Your order will be ready shortly.")
+
+    order_again = valid_input("Would you like to place another order? "
+                              "Please say 'yes' or 'no'.\n",
+                              "yes", "no")
+    if "no" in order_again:
+        print_pause("OK, goodbye!")
+    elif "yes" in order_again:
+        print_pause("Very good, I'm happy to take another order.")
